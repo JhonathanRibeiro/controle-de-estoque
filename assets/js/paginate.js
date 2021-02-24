@@ -3,6 +3,8 @@ let res = document.querySelector('#res');
 let produtos = localStorage.getItem("produtos");
 let produto = JSON.parse(produtos)
 //-------------------------------------------------------------------------------------
+if(produto === null) {res.innerHTML = `Estoque vazio`} 
+
 let perPage = 5;
 const state = {
     page: 1,
@@ -10,28 +12,26 @@ const state = {
     totalPage: Math.ceil(produto.length / perPage),
     maxVisibleButtons: 5
 }
-const html = {
-    get(element) {
+
+class Html  {
+   static get(element) {
         return document.querySelector(element);
     }
 }
 
-const controls = {
-    next() {
+class Controls {
+   static next() {
         state.page++
         const lastPage = state.page > state.totalPage
-        //se for a última página
-        if (lastPage) {
-            state.page--
-        }
-    },
-    prev() {
+        if (lastPage) {state.page--}
+    }
+   static prev() {
         state.page--
         if (state.page < 1) {
             state.page++
         }
-    },
-    goTo(page) {
+    }
+    static goTo(page) {
         if (page < 1) {
             page = 1
         }
@@ -39,32 +39,32 @@ const controls = {
         if (page > state.totalPage) {
             state.page = state.totalPage
         }
-    },
-    createListeners() {
-        html.get('.first').addEventListener('click', () => {
-            controls.goTo(1)
+    }
+    static createListeners() {
+        Html.get('.first').addEventListener('click', () => {
+            Controls.goTo(1)
             update();
         })
 
-        html.get('.last').addEventListener('click', () => {
-            controls.goTo(state.totalPage)
+        Html.get('.last').addEventListener('click', () => {
+            Controls.goTo(state.totalPage)
             update();
         })
 
-        html.get('.next').addEventListener('click', () => {
-            controls.next();
+        Html.get('.next').addEventListener('click', () => {
+            Controls.next();
             update();
         })
 
-        html.get('.prev').addEventListener('click', () => {
-            controls.prev();
+        Html.get('.prev').addEventListener('click', () => {
+            Controls.prev();
             update();
         })
     }
 }
 
-const list = {
-    create(produto) {
+class List  {
+    static create(produto) {
         var status = '';
         var validade = new Date(produto.validade);
         if (validade < dataAtual) { status = 'btn-secondary' } else { status = 'btn-success' }
@@ -93,8 +93,8 @@ const list = {
                 </button>
             </td>
         </tr>`
-    },
-    update() {
+    }
+    static update() {
         res.innerHTML = ""
         let page = state.page - 1
         let start = page * state.perPage
@@ -102,13 +102,13 @@ const list = {
 
         const paginatedItems = produto.slice(start, end);
 
-        paginatedItems.forEach(list.create)
+        paginatedItems.forEach(List.create)
         console.log(paginatedItems)
     }
 }
 
 const buttons = {
-    element: html.get('.pagination .page'),
+    element: Html.get('.pagination .page'),
     create(number){
         const btnList = document.createElement('li');
         const btnLink = document.createElement('a');
@@ -123,7 +123,7 @@ const buttons = {
 
         list.addEventListener('click', (event)=>{
             const page = event.target.innerText
-            controls.goTo(page)
+            Controls.goTo(page)
             update()
         });
         buttons.element.appendChild(list)
@@ -156,13 +156,13 @@ const buttons = {
 }
 
 function update() {
-    list.update()
+    List.update()
     buttons.update()
 }
 
 function init() {
     update();
-    controls.createListeners();
+    Controls.createListeners();
 }
 
 init()
