@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>::PEPS - Cadastro::</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="#" class="simple-text">
+                        PEPS
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="pe-7s-graph"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="cadastro.html">
+                            <i class="pe-7s-note2"></i>
+                            <p>Cadastro de produtos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="estoque.html">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Estoque</p>
+                        </a>
+                    </li>
+                    </li>
+                    <li class="active-pro">
+                        <a href="upgrade.html">
+                            <i class="pe-7s-settings"></i>
+                            <p>Configurações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="sobre.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Sobre</p>
+                        </a>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#navigation-example-2">
+                            <span class="sr-only">Mobile navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Cadastro de produtos</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#">
+                                    <p>Log out</p>
+                                </a>
+                            </li>
+                            <li class="separator hidden-lg hidden-md"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="modalAlert"></div>
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Novo produto</h4>
+                                </div>
+                                <div class="content">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Descrição</label>
+                                                    <input type="text" class="form-control" id="descricao"
+                                                        placeholder="Nome do produto">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Marca</label>
+                                                    <input type="text" class="form-control" id="marca"
+                                                        placeholder="Marca do produto">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Cod de barras</label>
+                                                    <input type="text" maxlength="14" class="form-control"
+                                                        id="cod_barras" placeholder="Cod de barras">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Fornecedor</label>
+                                                    <input type="text" class="form-control" id="fornecedor"
+                                                        placeholder="Fornecedor">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Quantidade</label>
+                                                    <input type="text" class="form-control" id="quantidade"
+                                                        placeholder="Quantidade">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Un. de medida</label>
+                                                    <select id="un-medida" class="selectpicker"
+                                                        data-style="btn-default btn-block">
+                                                        <option value="LTS">LTS</option>
+                                                        <option value="UN">UN</option>
+                                                        <option value="KG">KG</option>
+                                                        <option value="ML">ML</option>
+                                                        <option value="CX">CX</option>
+                                                        <option value="PCT">PCT</option>
+                                                        <option value="PÇ">PÇ</option>
+                                                        <option value="LATA">LATA</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Preço custo</label>
+                                                    <input type="number" class="form-control" id="preco-custo"
+                                                        placeholder="R$0,00">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Preço revenda</label>
+                                                    <input type="number" class="form-control" id="preco-revenda"
+                                                        placeholder="R$0,00">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Validade</label>
+                                                    <input id="validade" type="date" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button onclick="Form.getValidate()" type="submit"
+                                            class="btn btn-info btn-fill pull-left">
+                                            Cadastrar
+                                        </button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Home
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>document.write(new Date().getFullYear())</script> <a href="#">PEPS</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+<script src="assets/js/cadastro.js"></script>
+<script src="assets/js/jquery.3.2.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-notify.js"></script>
+<script src="assets/js/bootstrap-select.js"></script>
+<script type="text/javascript">
+    if ($(".selectpicker").length != 0 ? $(".selectpicker").selectpicker() : '');
+</script>
+</html>
