@@ -809,6 +809,8 @@ fieldset[disabled] .btn-danger.active {
 
 .btn-danger.btn-fill {
     color: #FFFFFF;
+    padding: 0.65em 0.96em;
+    font-weight: bold;
     background-color: #FF4A55;
     opacity: 1;
     filter: alpha(opacity=100);

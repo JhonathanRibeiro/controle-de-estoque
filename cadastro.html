@@ -97,6 +97,7 @@
                                     <div>
                                         <div class="row">
                                             <div class="col-md-4">
+                                                <span hidden class="product_id">ID</span>
                                                 <div class="form-group">
                                                     <label>Descrição</label>
                                                     <input type="text" class="form-control" id="descricao"
@@ -172,7 +173,7 @@
                                             </div>
                                         </div>
 
-                                        <button onclick="Form.getValidate()" type="submit"
+                                        <button id="btncadastro" type="submit"
                                             class="btn btn-info btn-fill pull-left">
                                             Cadastrar
                                         </button>
@@ -206,12 +207,18 @@
     </div>
 </body>
 
-<script src="assets/js/cadastro.js"></script>
+<script type="module" src="assets/js/cadastro.js"></script>
 <script src="assets/js/jquery.3.2.1.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/bootstrap-notify.js"></script>
 <script src="assets/js/bootstrap-select.js"></script>
 <script type="text/javascript">
     if ($(".selectpicker").length != 0 ? $(".selectpicker").selectpicker() : '');
+</script>
+<script type="module">
+    import { Form } from './assets/js/cadastro.js';
+    document.getElementById('btncadastro').addEventListener('click',()=>{
+        Form.getValidate();
+    });
 </script>
 </html>

@@ -1,6 +1,14 @@
-const data = new Date();
-const prazoMinValidade = 10;
-const prazoMaxValidade = 30;
+import { uniqueID } from './modules/uniqueID.module.js';
+import { setNewProduct } from './modules/newProduct.module.js';
+import { modalAlert } from './modules/modalAlert.module.js';
+import { validity } from './modules/validity.module.js';
+
+let produtos = localStorage.getItem("produtos");
+let produto = JSON.parse(produtos)
+
+if (produto == null) { produto = 1 }
+export const prazoMinValidade = 10;
+export const prazoMaxValidade = 30;
 
 const Form = {
     getValidate() {
@@ -13,21 +21,31 @@ const Form = {
         const codigo = document.querySelector('#cod_barras');
         const unMedida = document.querySelector('#un-medida');
         const marca = document.querySelector('#marca');
+        const product_id = document.querySelector('.product_id');
 
         if (nome.value.trim() == '') {
-            this.getModalAlert({
-                message: `Atenção! O campo descrição é obrigatório.`,
+            modalAlert({
+                message: `Atenção! O campo <b>descrição</b> é obrigatório.`,
                 type: 'warning'
-            })
+            }, setTimeout(() => {
+                modalAlert({ message: '', type: '' }).style.opacity = 0;
+            }, 3500))
         } else if (precoCusto.value.trim() == '') {
-            this.getModalAlert({
-                message: `Atenção! Informe o preço do produto.`,
+            modalAlert({
+                message: `Atenção! Informe o <b>preço de custo</b> do produto.`,
                 type: 'warning'
-            })
+            }, setTimeout(() => {
+                modalAlert({ message: '', type: '' }).style.opacity = 0;
+            }, 3500))
         } else {
-            this.getValidity(validadeProduto, nome.value)
+            let id = uniqueID(produto);
 
-            Form.setNewProduct(
+            product_id.setAttribute('data-key', parseInt(id))
+
+            validity(validadeProduto, nome.value)
+
+            setNewProduct(
+                parseInt(product_id.getAttribute('data-key')),
                 validadeProduto,
                 nome.value,
                 marca.value,
@@ -40,66 +58,6 @@ const Form = {
             );
         }
     },
-    setNewProduct(validade, produto, marca, fornecedor, precoCusto, precoRevenda, qtde, unmedida, codigo) {
-        let novoProduto = {
-            validade: validade,
-            nome: produto,
-            marca: marca,
-            fornecedor: fornecedor,
-            precoCusto: precoCusto,
-            precoRevenda: precoRevenda,
-            qtde: qtde,
-            unMedida: unmedida,
-            codigo: codigo
-        }
-        if (typeof (Storage) !== "undefined") {
-            let produtos = localStorage.getItem("produtos");
-            if (produtos == null ? produtos = [] : produtos = JSON.parse(produtos))
-                produtos.push(novoProduto);
-            localStorage.setItem("produtos", JSON.stringify(produtos))
-            this.getModalAlert({
-                message: `Foram cadastradas com sucesso ${qtde} ${unmedida} do produto ${produto}!`,
-                type: 'success'
-            })
-            console.log("produtos: ", produtos);
-        }
-    },
-    getValidity(validade, nome) {
-        const validadeProd = new Date(validade);
-        const diff = Math.abs(data.getTime() - validadeProd.getTime())
-        const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        if (data > validadeProd) {
-            this.getModalAlert({
-                message: `O produto ${nome} venceu à ${dias} dias`,
-                type: 'danger'
-            })
-        } else {
-            this.getModalAlert({
-                message: `O produto ${nome} irá vencer em ${dias} dias`,
-                type: 'warning'
-            })
-        }
-        data.setDate(data.getDate())
-    },
-    getModalAlert({ message, type }) {
-        var modal = document.querySelector('.modalAlert');
-        modal.innerHTML = `
-        <div 
-            class="col-xs-11 col-sm-4 alert alert-${type} alert-with-icon animated fadeInDown"
-            data-notify="container" 
-            data-notify-position="top-right"
-            role="alert" 
-            style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; top: 20px; right: 20px;">
-            <span data-notify="icon" class="pe-7s-bell"></span> 
-            <span data-notify="title"></span> 
-            <span data-notify="message">
-                ${message}
-            </span>
-        </div>
-        `;
-        setTimeout(() => {
-            modal.style.opacity = 0;
-            modal.style.opacity = 1;
-        }, 2500)
-    }
 }
+
+export { Form }
