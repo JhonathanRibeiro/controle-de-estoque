@@ -1,0 +1,20 @@
+select#un-medida {
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px;
+    color: #565656;
+    padding: 8px 12px;
+    height: 40px;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+option {
+    background-color:#ffff;
+    color: #797979;
+    border: none!important;
+    outline: none!important;
+    cursor: pointer;
+}
